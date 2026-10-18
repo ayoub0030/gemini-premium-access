@@ -4,7 +4,7 @@ export const OLD_PRICE = "2 400 MAD";
 export const DURATION = "18 mois";
 // PayPal payment link (PayPal.me, hosted button or payment link).
 // In PayPal, set the return URL after payment to: https://YOUR-SITE/merci
-export const PAYPAL_URL = "https://www.paypal.com/ncp/payment/VOTRE_LIEN";
+export const PAYPAL_URL = "https://www.paypal.com/ncp/payment/GQFN88SLJWYXQ";
 // WhatsApp number, digits only with country code (no +).
 export const WHATSAPP_NUMBER = "212600000000";
 export const WHATSAPP_MESSAGE =
