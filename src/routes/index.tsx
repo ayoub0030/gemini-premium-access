@@ -1,5 +1,16 @@
+// ============= Full file contents =============
+
 import { createFileRoute } from "@tanstack/react-router";
-import { DURATION, OLD_PRICE, PAYPAL_URL, PRICE, whatsappUrl } from "@/lib/config";
+import {
+  DURATION,
+  FAQ_ITEMS,
+  OLD_PRICE,
+  PAYPAL_URL,
+  PRICE,
+  REVIEWS,
+  whatsappUrl,
+  type Faq,
+} from "@/lib/config";
 import heroImg from "@/assets/hero.jpg";
 import veoImg from "@/assets/veo.jpg";
 import bananaImg from "@/assets/banana.jpg";
@@ -109,6 +120,42 @@ function FeatureIcon({ name }: { name: string }) {
   );
 }
 
+function StarRow() {
+  return (
+    <div className="flex gap-1 text-gold" aria-label="Note 5 sur 5">
+      {[0, 1, 2, 3, 4].map((i) => (
+        <svg key={i} className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 3 14.6 8.6 20.5 9.4 16.2 13.6 17.3 19.5 12 16.7 6.7 19.5 7.8 13.6 3.5 9.4 9.4 8.6Z" />
+        </svg>
+      ))}
+    </div>
+  );
+}
+
+function FaqItem({ item }: { item: Faq }) {
+  return (
+    <details className="feature-card group rounded-2xl px-6 py-5">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
+        <span className="font-display text-base font-bold md:text-lg">{item.q}</span>
+        <svg
+          className="h-5 w-5 shrink-0 text-primary transition-transform duration-200 group-open:rotate-45"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          aria-hidden="true"
+        >
+          <path d="M12 5v14" />
+          <path d="M5 12h14" />
+        </svg>
+      </summary>
+      <p className="mt-3 text-sm text-muted-foreground">{item.a}</p>
+      <p className="mt-2 text-sm text-primary" dir="rtl">{item.ar}</p>
+    </details>
+  );
+}
+
 function BuyButton({ big }: { big?: boolean }) {
   return (
     <a href={PAYPAL_URL} target="_blank" rel="noopener noreferrer" className={`btn-buy ${big ? "btn-buy-lg" : ""}`}>
@@ -211,6 +258,29 @@ function Index() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-5xl px-6 py-16">
+        <h2 className="text-center font-display text-3xl font-bold md:text-4xl">Ils ont déjà commencé</h2>
+        <p className="mt-2 text-center text-muted-foreground" dir="rtl">آراء العملاء</p>
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {REVIEWS.map((r) => (
+            <figure key={r.name} className="feature-card rounded-2xl p-6">
+              <StarRow />
+              <blockquote className="mt-4 text-sm text-foreground">{r.text}</blockquote>
+              <p className="mt-3 text-sm text-primary" dir="rtl">{r.ar}</p>
+              <figcaption className="mt-5 flex items-center gap-3 border-t border-border pt-4">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-buy font-display text-sm font-bold text-primary-foreground">
+                  {r.name.charAt(0)}
+                </span>
+                <span>
+                  <span className="block text-sm font-semibold">{r.name}</span>
+                  <span className="block text-xs text-muted-foreground">{r.city}</span>
+                </span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
       <section className="mx-auto max-w-4xl px-6 py-16">
         <h2 className="text-center font-display text-3xl font-bold">Comment ça marche ?</h2>
         <p className="mt-2 text-center text-muted-foreground" dir="rtl">كيف تعمل العملية؟</p>
@@ -225,6 +295,19 @@ function Index() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-3xl px-6 py-16">
+        <h2 className="text-center font-display text-3xl font-bold">Vos questions</h2>
+        <p className="mt-2 text-center text-muted-foreground" dir="rtl">أسئلة شائعة</p>
+        <div className="mt-10 space-y-3">
+          {FAQ_ITEMS.map((f) => (
+            <FaqItem key={f.q} item={f} />
+          ))}
+        </div>
+        <p className="mt-8 text-center text-sm text-muted-foreground">
+          Une autre question ? <a href={whatsappUrl()} className="text-primary underline">Écrivez-nous sur WhatsApp</a>
+        </p>
+      </section>
+
       <section className="px-6 py-20 text-center">
         <h2 className="font-display text-4xl font-bold">Prêt à commencer ?</h2>
         <p className="mt-2 text-muted-foreground">{PRICE} seulement pour {DURATION}</p>
@@ -235,7 +318,7 @@ function Index() {
       </section>
 
       <footer className="border-t border-border py-8 text-center text-xs text-muted-foreground">
-        © 2026 Gemini Store · Paiement sécurisé PayPal
+        © 2026 Gemini Store · Paiement sécurisé PayPal · Non affilié à Google
       </footer>
     </main>
   );
