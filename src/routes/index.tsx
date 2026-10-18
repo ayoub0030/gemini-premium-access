@@ -143,14 +143,19 @@ function Index() {
         </div>
 
         <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((f) => (
-            <div key={f.title} className="feature-card rounded-2xl p-6">
-              <div className="text-3xl">{f.icon}</div>
-              <h3 className="mt-4 font-display text-lg font-bold">{f.title}</h3>
-              <p className="text-sm text-primary" dir="rtl">{f.ar}</p>
-              <p className="mt-2 text-sm text-muted-foreground">{f.text}</p>
-            </div>
-          ))}
+          {features.map((f, i) => {
+            const wide = i === features.length - 1;
+            return (
+              <div key={f.title} className={`feature-card rounded-2xl p-6 ${wide ? "sm:col-span-2 lg:col-span-2 sm:flex sm:items-center sm:gap-8" : ""}`}>
+                <div className="text-3xl">{f.icon}</div>
+                <div className={wide ? "mt-4 sm:mt-0" : "mt-4"}>
+                  <h3 className="font-display text-lg font-bold">{f.title}</h3>
+                  <p className="text-sm text-primary" dir="rtl">{f.ar}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">{f.text}</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 
