@@ -44,11 +44,11 @@ const showcase = [
 ];
 
 const features = [
-  { icon: "✦", title: "Gemini 3 Pro", ar: "أقوى نموذج ذكاء اصطناعي", text: "Le modèle le plus avancé de Google pour écrire, coder, analyser et raisonner." },
-  { icon: "🔬", title: "Deep Research", ar: "بحث معمق", text: "Des rapports de recherche complets générés automatiquement." },
-  { icon: "💾", title: "2 To de stockage", ar: "تخزين 2 تيرابايت", text: "Google Drive, Gmail et Photos avec 2 To d'espace." },
-  { icon: "📒", title: "NotebookLM Pro", ar: "دفتر ملاحظات ذكي", text: "Résumés, podcasts audio et analyse de vos documents." },
-  { icon: "📧", title: "Gemini dans Gmail & Docs", ar: "داخل تطبيقات جوجل", text: "L'IA directement dans Gmail, Docs, Sheets et Meet." },
+  { icon: "spark", title: "Gemini 3 Pro", ar: "أقوى نموذج ذكاء اصطناعي", text: "Le modèle le plus avancé de Google pour écrire, coder, analyser et raisonner." },
+  { icon: "research", title: "Deep Research", ar: "بحث معمق", text: "Des rapports de recherche complets générés automatiquement." },
+  { icon: "storage", title: "2 To de stockage", ar: "تخزين 2 تيرابايت", text: "Google Drive, Gmail et Photos avec 2 To d'espace." },
+  { icon: "notebook", title: "NotebookLM Pro", ar: "دفتر ملاحظات ذكي", text: "Résumés, podcasts audio et analyse de vos documents." },
+  { icon: "mail", title: "Gemini dans Gmail & Docs", ar: "داخل تطبيقات جوجل", text: "L'IA directement dans Gmail, Docs, Sheets et Meet." },
 ];
 
 const steps = [
@@ -56,6 +56,58 @@ const steps = [
   { n: "2", t: "Payez par carte via PayPal", ar: "ادفع بالبطاقة عبر PayPal" },
   { n: "3", t: "Recevez le lien sur WhatsApp", ar: "استلم رابط التفعيل على واتساب" },
 ];
+
+function FeatureIcon({ name }: { name: string }) {
+  const svg = {
+    className: "h-7 w-7",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+  if (name === "research") {
+    return (
+      <svg {...svg}>
+        <circle cx="11" cy="11" r="6" />
+        <path d="M15.5 15.5 20 20" />
+      </svg>
+    );
+  }
+  if (name === "storage") {
+    return (
+      <svg {...svg}>
+        <ellipse cx="12" cy="6" rx="7" ry="3" />
+        <path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6" />
+        <path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3" />
+      </svg>
+    );
+  }
+  if (name === "notebook") {
+    return (
+      <svg {...svg}>
+        <rect x="5" y="3" width="14" height="18" rx="2" />
+        <path d="M9 3v18" />
+        <path d="M12 8h4" />
+        <path d="M12 12h4" />
+      </svg>
+    );
+  }
+  if (name === "mail") {
+    return (
+      <svg {...svg}>
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <path d="m3 7 9 6 9-6" />
+      </svg>
+    );
+  }
+  return (
+    <svg {...svg}>
+      <path d="M12 3 13.9 8.1 19 10 13.9 11.9 12 17 10.1 11.9 5 10 10.1 8.1Z" />
+    </svg>
+  );
+}
 
 function BuyButton({ big }: { big?: boolean }) {
   return (
@@ -147,7 +199,7 @@ function Index() {
             const wide = i === features.length - 1;
             return (
               <div key={f.title} className={`feature-card rounded-2xl p-6 ${wide ? "sm:col-span-2 lg:col-span-2 sm:flex sm:items-center sm:gap-8" : ""}`}>
-                <div className="text-3xl">{f.icon}</div>
+                <div className="text-primary"><FeatureIcon name={f.icon} /></div>
                 <div className={wide ? "mt-4 sm:mt-0" : "mt-4"}>
                   <h3 className="font-display text-lg font-bold">{f.title}</h3>
                   <p className="text-sm text-primary" dir="rtl">{f.ar}</p>
