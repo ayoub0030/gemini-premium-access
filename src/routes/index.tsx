@@ -1,5 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { DURATION, OLD_PRICE, PAYPAL_URL, PRICE, whatsappUrl } from "@/lib/config";
+import heroImg from "@/assets/hero.jpg";
+import veoImg from "@/assets/veo.jpg";
+import bananaImg from "@/assets/banana.jpg";
+import flowImg from "@/assets/flow.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -15,11 +19,32 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+const showcase = [
+  {
+    img: veoImg,
+    alt: "Écran de film flottant montrant une montagne au coucher du soleil, entouré de bandes film et de traînées de lumière orange",
+    title: "Veo 3",
+    ar: "إنشاء فيديوهات بالذكاء الاصطناعي",
+    text: "Générez des vidéos réalistes avec son à partir d'un simple texte.",
+  },
+  {
+    img: bananaImg,
+    alt: "Portrait sur fond noir à moitié transformé en liquide orange brillant",
+    title: "Nano Banana",
+    ar: "إنشاء وتعديل الصور",
+    text: "Créez et retouchez des images en haute qualité en quelques secondes.",
+  },
+  {
+    img: flowImg,
+    alt: "Studio de montage cinématographique sombre avec frames de film et onde audio orange",
+    title: "Flow",
+    ar: "استوديو الأفلام بالذكاء الاصطناعي",
+    text: "L'outil de création de films IA de Google, avec crédits IA inclus.",
+  },
+];
+
 const features = [
   { icon: "✦", title: "Gemini 3 Pro", ar: "أقوى نموذج ذكاء اصطناعي", text: "Le modèle le plus avancé de Google pour écrire, coder, analyser et raisonner." },
-  { icon: "🎬", title: "Veo 3", ar: "إنشاء فيديوهات", text: "Générez des vidéos réalistes avec son à partir d'un simple texte." },
-  { icon: "🍌", title: "Nano Banana", ar: "إنشاء وتعديل الصور", text: "Créez et retouchez des images en haute qualité en quelques secondes." },
-  { icon: "🎞️", title: "Flow", ar: "استوديو الأفلام", text: "L'outil de création de films IA de Google, avec crédits IA inclus." },
   { icon: "🔬", title: "Deep Research", ar: "بحث معمق", text: "Des rapports de recherche complets générés automatiquement." },
   { icon: "💾", title: "2 To de stockage", ar: "تخزين 2 تيرابايت", text: "Google Drive, Gmail et Photos avec 2 To d'espace." },
   { icon: "📒", title: "NotebookLM Pro", ar: "دفتر ملاحظات ذكي", text: "Résumés, podcasts audio et analyse de vos documents." },
@@ -57,6 +82,18 @@ function Index() {
         <p className="mt-2 text-muted-foreground" dir="rtl">كل أدوات الذكاء الاصطناعي من جوجل</p>
       </section>
 
+      <section className="mx-auto max-w-4xl px-4 pb-16">
+        <div className="glow-card overflow-hidden rounded-[2rem] border border-border">
+          <img
+            src={heroImg}
+            alt="Ordinateur portable et smartphone sur fond noir affichant une interface d'assistant IA en lumière orange"
+            width={1280}
+            height={720}
+            className="h-auto w-full object-cover"
+          />
+        </div>
+      </section>
+
       <section className="px-4 pb-16">
         <div className="glow-card mx-auto max-w-xl overflow-hidden rounded-[2rem] text-center">
           <div className="p-8">
@@ -84,7 +121,28 @@ function Index() {
       <section id="offre" className="mx-auto max-w-5xl px-6 py-16">
         <h2 className="text-center font-display text-3xl font-bold md:text-4xl">Ce que vous obtenez</h2>
         <p className="mt-2 text-center text-muted-foreground" dir="rtl">ماذا ستحصل عليه مع هذا العرض</p>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {showcase.map((s) => (
+            <div key={s.title} className="feature-card overflow-hidden rounded-2xl">
+              <img
+                src={s.img}
+                alt={s.alt}
+                width={960}
+                height={688}
+                loading="lazy"
+                className="h-48 w-full object-cover md:h-56"
+              />
+              <div className="p-6">
+                <h3 className="font-display text-lg font-bold">{s.title}</h3>
+                <p className="text-sm text-primary" dir="rtl">{s.ar}</p>
+                <p className="mt-2 text-sm text-muted-foreground">{s.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((f) => (
             <div key={f.title} className="feature-card rounded-2xl p-6">
               <div className="text-3xl">{f.icon}</div>
