@@ -1,5 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { DURATION, OLD_PRICE, PAYPAL_URL, PRICE, whatsappUrl } from "@/lib/config";
+import heroImg from "@/assets/hero.jpg";
+import veoImg from "@/assets/veo.jpg";
+import bananaImg from "@/assets/banana.jpg";
+import flowImg from "@/assets/flow.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -15,15 +19,36 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+const showcase = [
+  {
+    img: veoImg,
+    alt: "Écran de film flottant montrant une montagne au coucher du soleil, entouré de bandes film et de traînées de lumière orange",
+    title: "Veo 3",
+    ar: "إنشاء فيديوهات بالذكاء الاصطناعي",
+    text: "Générez des vidéos réalistes avec son à partir d'un simple texte.",
+  },
+  {
+    img: bananaImg,
+    alt: "Portrait sur fond noir à moitié transformé en liquide orange brillant",
+    title: "Nano Banana",
+    ar: "إنشاء وتعديل الصور",
+    text: "Créez et retouchez des images en haute qualité en quelques secondes.",
+  },
+  {
+    img: flowImg,
+    alt: "Studio de montage cinématographique sombre avec frames de film et onde audio orange",
+    title: "Flow",
+    ar: "استوديو الأفلام بالذكاء الاصطناعي",
+    text: "L'outil de création de films IA de Google, avec crédits IA inclus.",
+  },
+];
+
 const features = [
-  { icon: "✦", title: "Gemini 3 Pro", ar: "أقوى نموذج ذكاء اصطناعي", text: "Le modèle le plus avancé de Google pour écrire, coder, analyser et raisonner." },
-  { icon: "🎬", title: "Veo 3", ar: "إنشاء فيديوهات", text: "Générez des vidéos réalistes avec son à partir d'un simple texte." },
-  { icon: "🍌", title: "Nano Banana", ar: "إنشاء وتعديل الصور", text: "Créez et retouchez des images en haute qualité en quelques secondes." },
-  { icon: "🎞️", title: "Flow", ar: "استوديو الأفلام", text: "L'outil de création de films IA de Google, avec crédits IA inclus." },
-  { icon: "🔬", title: "Deep Research", ar: "بحث معمق", text: "Des rapports de recherche complets générés automatiquement." },
-  { icon: "💾", title: "2 To de stockage", ar: "تخزين 2 تيرابايت", text: "Google Drive, Gmail et Photos avec 2 To d'espace." },
-  { icon: "📒", title: "NotebookLM Pro", ar: "دفتر ملاحظات ذكي", text: "Résumés, podcasts audio et analyse de vos documents." },
-  { icon: "📧", title: "Gemini dans Gmail & Docs", ar: "داخل تطبيقات جوجل", text: "L'IA directement dans Gmail, Docs, Sheets et Meet." },
+  { icon: "spark", title: "Gemini 3 Pro", ar: "أقوى نموذج ذكاء اصطناعي", text: "Le modèle le plus avancé de Google pour écrire, coder, analyser et raisonner." },
+  { icon: "research", title: "Deep Research", ar: "بحث معمق", text: "Des rapports de recherche complets générés automatiquement." },
+  { icon: "storage", title: "2 To de stockage", ar: "تخزين 2 تيرابايت", text: "Google Drive, Gmail et Photos avec 2 To d'espace." },
+  { icon: "notebook", title: "NotebookLM Pro", ar: "دفتر ملاحظات ذكي", text: "Résumés, podcasts audio et analyse de vos documents." },
+  { icon: "mail", title: "Gemini dans Gmail & Docs", ar: "داخل تطبيقات جوجل", text: "L'IA directement dans Gmail, Docs, Sheets et Meet." },
 ];
 
 const steps = [
@@ -31,6 +56,58 @@ const steps = [
   { n: "2", t: "Payez par carte via PayPal", ar: "ادفع بالبطاقة عبر PayPal" },
   { n: "3", t: "Recevez le lien sur WhatsApp", ar: "استلم رابط التفعيل على واتساب" },
 ];
+
+function FeatureIcon({ name }: { name: string }) {
+  const svg = {
+    className: "h-7 w-7",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+  if (name === "research") {
+    return (
+      <svg {...svg}>
+        <circle cx="11" cy="11" r="6" />
+        <path d="M15.5 15.5 20 20" />
+      </svg>
+    );
+  }
+  if (name === "storage") {
+    return (
+      <svg {...svg}>
+        <ellipse cx="12" cy="6" rx="7" ry="3" />
+        <path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6" />
+        <path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3" />
+      </svg>
+    );
+  }
+  if (name === "notebook") {
+    return (
+      <svg {...svg}>
+        <rect x="5" y="3" width="14" height="18" rx="2" />
+        <path d="M9 3v18" />
+        <path d="M12 8h4" />
+        <path d="M12 12h4" />
+      </svg>
+    );
+  }
+  if (name === "mail") {
+    return (
+      <svg {...svg}>
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <path d="m3 7 9 6 9-6" />
+      </svg>
+    );
+  }
+  return (
+    <svg {...svg}>
+      <path d="M12 3 13.9 8.1 19 10 13.9 11.9 12 17 10.1 11.9 5 10 10.1 8.1Z" />
+    </svg>
+  );
+}
 
 function BuyButton({ big }: { big?: boolean }) {
   return (
@@ -57,13 +134,25 @@ function Index() {
         <p className="mt-2 text-muted-foreground" dir="rtl">كل أدوات الذكاء الاصطناعي من جوجل</p>
       </section>
 
+      <section className="mx-auto max-w-4xl px-4 pb-16">
+        <div className="glow-card overflow-hidden rounded-[2rem] border border-border">
+          <img
+            src={heroImg}
+            alt="Ordinateur portable et smartphone sur fond noir affichant une interface d'assistant IA en lumière orange"
+            width={1280}
+            height={720}
+            className="h-auto w-full object-cover"
+          />
+        </div>
+      </section>
+
       <section className="px-4 pb-16">
         <div className="glow-card mx-auto max-w-xl overflow-hidden rounded-[2rem] text-center">
           <div className="p-8">
             <h2 className="font-display text-3xl font-bold md:text-4xl">Gemini Pro {DURATION}</h2>
             <div className="mt-6"><BuyButton /></div>
           </div>
-          <div className="orange-panel px-6 pb-8 pt-10">
+          <div className="orange-panel pb-8 pl-16 pr-6 pt-12">
             <div className="rounded-2xl bg-card p-6 text-left shadow-2xl">
               <p className="font-display text-2xl font-black">GOOGLE AI Pro ✦</p>
               <div className="mt-3 flex flex-wrap items-baseline gap-3">
@@ -84,15 +173,41 @@ function Index() {
       <section id="offre" className="mx-auto max-w-5xl px-6 py-16">
         <h2 className="text-center font-display text-3xl font-bold md:text-4xl">Ce que vous obtenez</h2>
         <p className="mt-2 text-center text-muted-foreground" dir="rtl">ماذا ستحصل عليه مع هذا العرض</p>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map((f) => (
-            <div key={f.title} className="feature-card rounded-2xl p-6">
-              <div className="text-3xl">{f.icon}</div>
-              <h3 className="mt-4 font-display text-lg font-bold">{f.title}</h3>
-              <p className="text-sm text-primary" dir="rtl">{f.ar}</p>
-              <p className="mt-2 text-sm text-muted-foreground">{f.text}</p>
+
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {showcase.map((s) => (
+            <div key={s.title} className="feature-card overflow-hidden rounded-2xl">
+              <img
+                src={s.img}
+                alt={s.alt}
+                width={960}
+                height={688}
+                loading="lazy"
+                className="h-48 w-full object-cover md:h-56"
+              />
+              <div className="p-6">
+                <h3 className="font-display text-lg font-bold">{s.title}</h3>
+                <p className="text-sm text-primary" dir="rtl">{s.ar}</p>
+                <p className="mt-2 text-sm text-muted-foreground">{s.text}</p>
+              </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((f, i) => {
+            const wide = i === features.length - 1;
+            return (
+              <div key={f.title} className={`feature-card rounded-2xl p-6 ${wide ? "sm:col-span-2 lg:col-span-2 sm:flex sm:items-center sm:gap-8" : ""}`}>
+                <div className="text-primary"><FeatureIcon name={f.icon} /></div>
+                <div className={wide ? "mt-4 sm:mt-0" : "mt-4"}>
+                  <h3 className="font-display text-lg font-bold">{f.title}</h3>
+                  <p className="text-sm text-primary" dir="rtl">{f.ar}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">{f.text}</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 
