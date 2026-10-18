@@ -100,7 +100,7 @@ function Index() {
             <h2 className="font-display text-3xl font-bold md:text-4xl">Gemini Pro {DURATION}</h2>
             <div className="mt-6"><BuyButton /></div>
           </div>
-          <div className="orange-panel px-6 pb-8 pt-10">
+          <div className="orange-panel pb-8 pl-16 pr-6 pt-12">
             <div className="rounded-2xl bg-card p-6 text-left shadow-2xl">
               <p className="font-display text-2xl font-black">GOOGLE AI Pro ✦</p>
               <div className="mt-3 flex flex-wrap items-baseline gap-3">
